@@ -50,8 +50,26 @@ int is_valid(Node* n){
 
 
 List* get_adj_nodes(Node* n){
-    List* list=createList();
-    return list;
+  List* list=createList(); //LISTA DE ADJUNTOS
+  int i,j,k; //INDEXADORES
+  int aux; //AUXILIAR PARA EL INTERCAMBIO DE VALORES
+  for(i=0;i<9;i++) { 
+    for(j=0;j<9;j++) {
+      if(n->sudo[i][j]==0) { //SI EL VALOR ES 0
+        for(k=1;k<10;k++) { //RECORRE LOS VALORES DE 1 A 9
+          Node* adj=copy(n); //CREA UN NUEVO NODO
+          adj->sudo[i][j]=k; //LE ASIGNA EL VALOR DE K
+          if(is_valid(adj)) { //SI EL VALOR ES VALIDO
+            pushBack(list,adj); //LO AGREGA A LA LISTA
+        }
+          
+      }
+        
+    }
+  }
+
+  
+  return list;
 }
 
 
