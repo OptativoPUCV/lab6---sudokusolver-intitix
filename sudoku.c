@@ -50,9 +50,7 @@ int is_valid(Node* n){
       if(n->sudo[i][j]!=0) { //SI NO ES CERO (NULO)
         for(k=0;k<9;k++) { //CICLO DEL 1 AL 9
           if(k!=j) { 
-            if(n->sudo[i][k]==n->sudo[i][j]) return 0; //COMPARAMOS EN LA MISMA FILA
-          }
-        }
+            if(n->sudo[i][k]==n->sudo[i][j]) return 0; //COMPARAMOS
           }
         }
       }
