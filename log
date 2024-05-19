@@ -83,3 +83,25 @@ Sun 19 May 2024 01:55:13 AM UTC:
  tests:  6|2
 total_score: 45/70
 32a90d5
+Sun 19 May 2024 01:56:20 AM UTC: 
+ sudoku.c | 50 ++++++++++++++++++++++++++++----------------------
+ 1 file changed, 28 insertions(+), 22 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:72:18: error: implicit declaration of function ‘is_in_list’ [-Werror=implicit-function-declaration]
+   72 |             if (!is_in_list(list, adj)) {
+      |                  ^~~~~~~~~~
+sudoku.c: At top level:
+sudoku.c:86:5: error: redefinition of ‘is_valid’
+   86 | int is_valid(Node* n){
+      |     ^~~~~~~~
+sudoku.c:46:5: note: previous definition of ‘is_valid’ with type ‘int(Node *)’
+   46 | int is_valid(Node* n){
+      |     ^~~~~~~~
+test.c: In function ‘test_isfinal’:
+test.c:180:8: error: implicit declaration of function ‘is_final’ [-Werror=implicit-function-declaration]
+  180 |     if(is_final(initial)){
+      |        ^~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+2f965d3
