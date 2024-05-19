@@ -43,34 +43,21 @@ void print_node(Node* n){
     printf("\n");
 }
 
-int is_valid(Node* n) {
-    int row[9][10] = {0}; // Array to mark numbers in each row
-    int col[9][10] = {0}; // Array to mark numbers in each column
-    int submatrix[9][10] = {0}; // Array to mark numbers in each submatrix
-    // Check rows and columns for duplicates
-    for (int i = 0; i < 9; i++) {
-        for (int j = 0; j < 9; j++) {
-            int num = n->sudo[i][j];
-            // Check row
-            if (row[i][num]) return 0; // Duplicate number in the row
-            row[i][num] = 1;
-            // Check column
-            if (col[j][num]) return 0; // Duplicate number in the column
-            col[j][num] = 1;
+int is_valid(Node* n){
+    int i,j,k;
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            if(n->sudo[i][j]!=0) {
+                for(k=1;k<9;k++) {
+                    if(k!=j) { 
+                        if(n->sudo[i][k]==n->sudo[i][j]) 
+                            return 0;
+                    }
+                }
+            }
         }
     }
-    // Check submatrices for duplicates
-    for (int k = 0; k < 9; k++) {
-        for (int p = 0; p < 9; p++) {
-            int i = 3 * (k / 3) + (p / 3);
-            int j = 3 * (k % 3) + (p % 3);
-            int num = n->sudo[i][j];
-            // Check submatrix
-            if (submatrix[k][num]) return 0; // Duplicate number in the submatrix
-            submatrix[k][num] = 1;
-        }
-    }
-    return 1; // State/node is valid
+    return 1;
 }
 
 
