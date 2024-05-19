@@ -76,11 +76,10 @@ List* get_adj_nodes(Node* n) {
                         free(adj); // Libera la memoria si no es válido
                     }
                 }
-                return list; // Retorna la lista una vez se han generado los adyacentes para el primer espacio vacío
             }
         }
     }
-    return list; // Retorna la lista (puede estar vacía si no se encontró espacio vacío)
+    return list; // Retorna la lista una vez se han generado los adyacentes para el primer espacio vacío
 }
 
 
