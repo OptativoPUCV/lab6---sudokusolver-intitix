@@ -48,7 +48,7 @@ int is_valid(Node* n){
   for(i=0;i<9;i++) { //RECORREMOS LAS FILAS
     for(j=0;j<9;j++) { // LAS COLUMNAS
       if(n->sudo[i][j]!=0) { //SI NO ES CERO (NULO)
-        for(k=0;k<9;k++) { //CICLO DEL 1 AL 9
+        for(k=1;k<9;k++) { //CICLO DEL 1 AL 9
           if(k!=j) { 
             if(n->sudo[i][k]==n->sudo[i][j]) return 0; //COMPARAMOS
           }
@@ -76,7 +76,7 @@ List* get_adj_nodes(Node* n) {
 						free(adj); // Libera la memoria si no es válido
 					}
 				}
-
+				return list; // Retorna la lista una vez se han generado los adyacentes para el primer espacio vacío
 			}
 		}
 	}
