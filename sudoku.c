@@ -60,44 +60,38 @@ int is_valid(Node* n){
 }
 
 
-List* get_adj_nodes(Node* n){
-  List* list=createList(); // LISTA DE ADJUNTOS
-  for(int i=0; i<9; i++) { 
-    for(int j=0; j<9; j++) {
-      if(n->sudo[i][j]==0) { // SI EL VALOR ES 0
-        for(int k=1; k<10; k++) { // RECORRE LOS VALORES DE 1 A 9
-          Node* adj=copy(n); // CREA UN NUEVO NODO
-          adj->sudo[i][j]=k; // ASIGNA EL VALOR DE K
-          if(is_valid(adj)) { // SI EL VALOR ES VALIDO Y NO ESTÁ EN LA LISTA
-            if (!is_in_list(list, adj)) { 
-              pushBack(list, adj); // LO AGREGA A LA LISTA
-            } else {
-              free(adj); // LIBERA MEMORIA SI YA EXISTE EN LA LISTA
+List* get_adj_nodes(Node* n) {
+    List* list = createList(); // Lista de nodos adyacentes
+    int i, j, k; // Indexadores
+
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            if (n->sudo[i][j] == 0) { // Si el valor es 0
+                for (k = 1; k < 10; k++) { // Recorre los valores de 1 a 9
+                    Node* adj = copy(n); // Crea un nuevo nodo
+                    adj->sudo[i][j] = k; // Le asigna el valor de k
+                    if (is_valid(adj)) { // Si el valor es válido
+                        pushBack(list, adj); // Lo agrega a la lista
+                    } else {
+                        free(adj); // Libera la memoria si no es válido
+                    }
+                }
+                return list; // Retorna la lista una vez se han generado los adyacentes para el primer espacio vacío
             }
-          } else {
-            free(adj); // LIBERA MEMORIA SI NO ES VÁLIDO
-          }
         }
-      }
     }
-  }
-  return list;
+    return list; // Retorna la lista (puede estar vacía si no se encontró espacio vacío)
 }
-int is_valid(Node* n){
-  for(int i=0; i<9; i++) {
-    for(int j=0; j<9; j++) {
-      if(n->sudo[i][j]!=0) { // SI NO ES CERO
-        for(int k=0; k<9; k++) {
-          if(k!=j) {
-            if(n->sudo[i][k]==n->sudo[i][j] || n->sudo[k][j]==n->sudo[i][j]) {
-              return 0; // NO ES VÁLIDO
-            }
-          }
-        }
-      }
+
+
+int is_final(Node* n){
+  int i,j;
+  for(i=0;i<9;i++) {
+    for(j=0;j<9;j++) {
+      if(n->sudo[i][j]==0) return 0; //SI ES 0, NO ES FINAL
     }
   }
-  return 1; // ES VÁLIDO
+  return 1;
 }
 
 Node* DFS(Node* initial, int* cont){
