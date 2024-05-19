@@ -60,26 +60,27 @@ int is_valid(Node* n){
 }
 
 
-List* get_adj_nodes(Node* n){
-  List* list=createList(); //LISTA DE ADJUNTOS
-  int i,j,k; //INDEXADORES
-  for(i=0;i<9;i++) { 
-    for(j=0;j<9;j++) {
-      if(n->sudo[i][j]==0) { //SI EL VALOR ES 0
-        for(k=1;k<10;k++) { //RECORRE LOS VALORES DE 1 A 9
-          Node* adj=copy(n); //CREA UN NUEVO NODO
-          adj->sudo[i][j]=k; //LE ASIGNA EL VALOR DE K
-          if(is_valid(adj)) { //SI EL VALOR ES VALIDO
-            pushBack(list,adj); //LO AGREGA A LA LISTA
-        }
-          
-      }
-        
-    }
-  }
+List* get_adj_nodes(Node* n) {
+    List* list = createList(); // Lista de nodos adyacentes
+    int i, j, k; // Indexadores
 
-  }
-  return list;
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            if (n->sudo[i][j] == 0) { // Si el valor es 0
+                for (k = 1; k < 10; k++) { // Recorre los valores de 1 a 9
+                    Node* adj = copy(n); // Crea un nuevo nodo
+                    adj->sudo[i][j] = k; // Le asigna el valor de k
+                    if (is_valid(adj)) { // Si el valor es válido
+                        pushBack(list, adj); // Lo agrega a la lista
+                    } else {
+                        free(adj); // Libera la memoria si no es válido
+                    }
+                }
+                return list; // Retorna la lista una vez se han generado los adyacentes para el primer espacio vacío
+            }
+        }
+    }
+    return list; // Retorna la lista (puede estar vacía si no se encontró espacio vacío)
 }
 
 
